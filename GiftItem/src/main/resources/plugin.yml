@@ -1,0 +1,8 @@
+name: GiftPlugin
+version: 1.0
+main: lyen.GiftPlugin
+api-version: 1.21
+commands:
+  gift:
+    description: 礼物插件
+    usage: /gift all 或 /gift one

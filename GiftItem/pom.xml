@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>lyen</groupId>
+    <artifactId>GiftPlugin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <!-- Properties 部分用于集中管理项目属性 -->
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- Repositories 部分定义了 Maven 从哪里下载依赖 -->
+    <repositories>
+        <!-- Spigot 仓库 -->
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
+    <!-- Dependencies 部分定义了项目所需的外部库 -->
+    <dependencies>
+        <!-- Spigot API 依赖 -->
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.21-R0.1-SNAPSHOT</version> <!-- 适配 1.21 -->
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Build 部分定义了项目的构建过程 -->
+    <build>
+        <defaultGoal>clean install</defaultGoal>
+        <plugins>
+            <!-- Maven 编译器插件 -->
+            <!-- 这个插件负责将 Java 源代码编译成字节码 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version> <!-- Java 21 需要较新版本的编译器插件 -->
+                <configuration>
+                    <!-- 源码版本 -->
+                    <source>21</source>
+                    <!-- 目标版本 -->
+                    <target>21</target>
+                    <!-- Java 语言版本 -->
+                    <release>21</release>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Shade 插件 -->
+            <!-- 这个插件用于将项目及其所有依赖打包成一个单独的 JAR 文件 -->
+            <!-- 对于 Minecraft 插件来说，这通常是必需的 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.1</version> <!-- 更新版本以支持 Java 21 -->
+                <executions>
+                    <execution>
+                        <!-- 绑定到 package 生命周期阶段 -->
+                        <phase>package</phase>
+                        <goals>
+                            <!-- 执行 shade 目标 -->
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
